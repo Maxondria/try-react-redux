@@ -8,16 +8,20 @@ import CourseList from "./CourseList";
 
 class CoursesPage extends Component {
   componentDidMount() {
-    const { courses, authors, actions } = this.props;
+    const {
+      courses,
+      authors,
+      actions: { forCourses, forAuthors }
+    } = this.props;
 
     if (courses.length === 0) {
-      actions
+      forCourses
         .loadCourses()
         .catch(error => alert("Error Loading Courses: " + error));
     }
 
     if (authors.length === 0) {
-      actions
+      forAuthors
         .loadAuthors()
         .catch(error => alert("Error Loading Authors: " + error));
     }
@@ -59,8 +63,8 @@ const mapStateToProps = state => {
 const MapDispatchToProps = dispatch => {
   return {
     actions: {
-      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
-      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch)
+      forCourses: bindActionCreators(courseActions, dispatch),
+      forAuthors: bindActionCreators(authorActions, dispatch)
     }
   };
 };
