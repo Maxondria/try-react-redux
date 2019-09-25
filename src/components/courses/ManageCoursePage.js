@@ -37,12 +37,14 @@ const MangeCoursePage = ({
   useEffect(() => {
     if (courses.length === 0) {
       loadCourses().catch(error => alert("Error Loading Courses: " + error));
+    } else {
+      setCourse({ ...props.course });
     }
 
     if (authors.length === 0) {
       loadAuthors().catch(error => alert("Error Loading Authors: " + error));
     }
-  }, []);
+  }, [props.course]);
 
   return (
     <CourseForm
@@ -65,9 +67,19 @@ MangeCoursePage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
+const getCourseBySlug = (courses, slug) => {
+  return courses.find(course => course.slug === slug) || null;
+};
+
+const mapStateToProps = (state, ownProps) => {
+  const slug = ownProps.match.params.slug;
+  const course =
+    slug && state.courses.length > 0
+      ? getCourseBySlug(state.courses, slug)
+      : newCourse;
+
   const { authors, courses } = state;
-  return { course: newCourse, courses, authors };
+  return { course, courses, authors };
 };
 
 const MapDispatchToProps = { loadCourses, loadAuthors, saveCourse };
