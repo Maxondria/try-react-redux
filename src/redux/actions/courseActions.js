@@ -22,6 +22,8 @@ export const loadCourses = function() {
       .then(courses => {
         dispatch(loadCoursesSuccess(courses));
       })
-      .catch(error => throw error);
+      .catch(error => {
+        throw error;
+      });
   };
 };
