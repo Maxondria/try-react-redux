@@ -44,4 +44,4 @@ export default connect(
   mapStateToProps,
   MapDispatchToProps
 )(MangeCoursePage);
-  
+
