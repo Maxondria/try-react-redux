@@ -12,7 +12,7 @@ const MangeCoursePage = ({ courses, authors, loadCourses, loadAuthors }) => {
 
     if (authors.length === 0) {
       loadAuthors().catch(error => alert("Error Loading Authors: " + error));
-    } 
+    }
   }, []);
 
   return (
