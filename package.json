@@ -2,7 +2,10 @@
   "name": "react-redux",
   "description": "React and Redux - Max BigBudget",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000"
+    "prestart:api": "node tools/createMockDb.js",
+    "start:api": "node tools/apiServer.js",
+    "start": "concurrently \"yarn run start:api\" \"yarn run start:dev\"",
+    "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000"
   },
   "dependencies": {
     "bootstrap": "4.3.1",
