@@ -12,6 +12,7 @@ const MangeCoursePage = ({
   loadCourses,
   saveCourse,
   loadAuthors,
+  history,
   ...props
 }) => {
   const [course, setCourse] = useState({ ...props.course });
@@ -26,7 +27,11 @@ const MangeCoursePage = ({
 
   const handleSave = event => {
     event.preventDefault();
-    saveCourse(course).catch(error => alert("Error Saving Course: " + error));
+    saveCourse(course)
+      .then(() => {
+        history.push("/courses");
+      })
+      .catch(error => alert("Error Saving Course: " + error));
   };
 
   useEffect(() => {
@@ -56,7 +61,8 @@ MangeCoursePage.propTypes = {
   loadAuthors: PropTypes.func.isRequired,
   saveCourse: PropTypes.func.isRequired,
   courses: PropTypes.array.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
