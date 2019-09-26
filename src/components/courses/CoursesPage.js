@@ -41,17 +41,21 @@ class CoursesPage extends Component {
 
         <h2>Courses</h2>
 
-        {this.props.loadingStatus && <Spinner />}
+        {this.props.loadingStatus ? (
+          <Spinner />
+        ) : (
+          <>
+            <button
+              style={{ marginBottom: 20 }}
+              className="btn btn-primary add-course"
+              onClick={() => this.setState({ redirectToAddCoursePage: true })}
+            >
+              Add Course
+            </button>
 
-        <button
-          style={{ marginBottom: 20 }}
-          className="btn btn-primary add-course"
-          onClick={() => this.setState({ redirectToAddCoursePage: true })}
-        >
-          Add Course
-        </button>
-
-        <CourseList courses={this.props.courses} />
+            <CourseList courses={this.props.courses} />
+          </>
+        )}
       </>
     );
   }
