@@ -28,9 +28,23 @@ const MangeCoursePage = ({
     }));
   };
 
+  const FormIsValid = () => {
+    const _errors = {};
+
+    if (!course.title) _errors.title = "Please provide a title";
+    if (!course.authorId) _errors.author = "Please choose an author";
+    if (!course.category) _errors.category = "Category is required";
+
+    setErrors(_errors);
+
+    //Form Valid if _errors has no properties
+    return Object.keys(_errors).length === 0;
+  };
+
   const handleSave = event => {
     event.preventDefault();
 
+    if (!FormIsValid()) return;
     setSaving(true);
 
     saveCourse(course)
