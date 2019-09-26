@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
+import { toast } from "react-toastify";
 
 const MangeCoursePage = ({
   courses,
@@ -34,6 +35,10 @@ const MangeCoursePage = ({
 
     saveCourse(course)
       .then(() => {
+        toast.success("🦄 Course Saved!", {
+          position: "top-right"
+        });
+
         history.push("/courses");
       })
       .catch(error => alert("Error Saving Course: " + error));
