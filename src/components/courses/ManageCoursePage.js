@@ -18,6 +18,7 @@ const MangeCoursePage = ({
 }) => {
   const [course, setCourse] = useState({ ...props.course });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
     setCourse(prevState => ({
@@ -28,6 +29,9 @@ const MangeCoursePage = ({
 
   const handleSave = event => {
     event.preventDefault();
+
+    setSaving(true);
+
     saveCourse(course)
       .then(() => {
         history.push("/courses");
@@ -54,6 +58,7 @@ const MangeCoursePage = ({
       course={course}
       authors={authors}
       errors={errors}
+      saving={saving}
       onChange={handleChange}
       onSave={handleSave}
     />
