@@ -43,7 +43,7 @@ const MangeCoursePage = ({
 
   const handleSave = event => {
     event.preventDefault();
-    //if (!FormIsValid()) return;
+    if (!FormIsValid()) return;
     setSaving(true);
     saveCourse(course)
       .then(() => {
