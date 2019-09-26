@@ -4,7 +4,7 @@ import HomePage from "../home/HomePage";
 import AboutPage from "../about/AboutPage";
 import CoursesPage from "../courses/CoursesPage";
 import PageNotFound from "../PageNotFound";
-import ManageCoursePage from "../courses/ManageCoursePage";
+import ManageCoursePage from "../courses/ManageCoursePage"; //eslint-disable-line import/no-named-as-default
 
 const AppRouter = () => {
   return (

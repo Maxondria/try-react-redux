@@ -8,7 +8,7 @@ import { newCourse } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 
-const MangeCoursePage = ({
+export const MangeCoursePage = ({
   courses,
   authors,
   loadCourses,
