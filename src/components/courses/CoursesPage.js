@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import CourseList from "./CourseList";
 import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner";
-import loadingStatus from "../../redux/reducers/apiStatusReducer";
+import { toast } from "react-toastify";
 
 class CoursesPage extends Component {
   state = {
@@ -34,6 +34,17 @@ class CoursesPage extends Component {
     }
   }
 
+  handleDelete = async course => {
+    try {
+      toast.success("Course Deleted");
+      await this.props.actions.forCourses.deleteCourse(course);
+    } catch (error) {
+      toast.error("Ooops, Deleting Course Failed Due to " + error.message, {
+        autoClose: false
+      });
+    }
+  };
+
   render() {
     return (
       <>
@@ -53,7 +64,10 @@ class CoursesPage extends Component {
               Add Course
             </button>
 
-            <CourseList courses={this.props.courses} />
+            <CourseList
+              courses={this.props.courses}
+              onDeleteClick={this.handleDelete}
+            />
           </>
         )}
       </>

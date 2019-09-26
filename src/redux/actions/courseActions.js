@@ -9,6 +9,13 @@ export function createCourseSuccess(course) {
   };
 }
 
+export function deleteCourseOptmistic(course) {
+  return {
+    type: actionTypes.DELETE_COURSE_OPTIMISTIC,
+    course
+  };
+}
+
 export function updateCourseSuccess(course) {
   return {
     type: actionTypes.UPDATE_COURSE_SUCCESS,
@@ -52,5 +59,14 @@ export const saveCourse = function(course) {
         dispatch(apiErrorCall());
         throw error;
       });
+  };
+};
+
+export const deleteCourse = function deleteCourse(course) {
+  return function(dispatch) {
+    //Doing optmistic delete, so not dispatching begin/end API call
+    //actions, or apiCallError action since we are not showing loading status for this
+    dispatch(deleteCourseOptmistic(course));
+    return courseApi.deleteCourse(course.id);
   };
 };
