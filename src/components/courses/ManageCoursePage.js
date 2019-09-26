@@ -43,10 +43,8 @@ const MangeCoursePage = ({
 
   const handleSave = event => {
     event.preventDefault();
-
-    if (!FormIsValid()) return;
+    //if (!FormIsValid()) return;
     setSaving(true);
-
     saveCourse(course)
       .then(() => {
         toast.success("🦄 Course Saved!", {
@@ -55,7 +53,10 @@ const MangeCoursePage = ({
 
         history.push("/courses");
       })
-      .catch(error => alert("Error Saving Course: " + error));
+      .catch(error => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   };
 
   useEffect(() => {
