@@ -1,5 +1,6 @@
 import actionTypes from "./actionTypes";
 import * as authorApi from "../../api/authorApi.js";
+import { beginApiCall } from "./apiStatusActions";
 
 export function loadAuthorsSuccess(authors) {
   return {
@@ -10,6 +11,7 @@ export function loadAuthorsSuccess(authors) {
 
 export const loadAuthors = function() {
   return function(dispatch) {
+    dispatch(beginApiCall());
     return authorApi
       .getAuthors()
       .then(authors => {

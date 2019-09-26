@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import CourseList from "./CourseList";
 import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner";
+import loadingStatus from "../../redux/reducers/apiStatusReducer";
 
 class CoursesPage extends Component {
   state = {
@@ -40,7 +41,7 @@ class CoursesPage extends Component {
 
         <h2>Courses</h2>
 
-        <Spinner />
+        {this.props.loadingStatus && <Spinner />}
 
         <button
           style={{ marginBottom: 20 }}
@@ -59,11 +60,12 @@ class CoursesPage extends Component {
 CoursesPage.propTypes = {
   actions: PropTypes.object.isRequired,
   courses: PropTypes.array.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  loadingStatus: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => {
-  const { authors, courses } = state;
+  const { authors, courses, loadingStatus } = state;
   return {
     courses:
       authors.length === 0
@@ -75,7 +77,8 @@ const mapStateToProps = state => {
                 .name
             };
           }),
-    authors
+    authors,
+    loadingStatus
   };
 };
 
