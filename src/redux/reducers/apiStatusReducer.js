@@ -5,7 +5,7 @@ function actionTypeEndsInSuccess(type) {
   return type.substring(type.length - 8) === "_SUCCESS";
 }
 
-export default function apiStatusReducer(state = initialState.loading, action) {
+export default function apiStatusReducer(state = initialState.loadingStatus, action) {
   if (action.type === actionTypes.BEGIN_API_CALL) {
     return true;
   } else if (

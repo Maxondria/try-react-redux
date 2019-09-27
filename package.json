@@ -6,7 +6,13 @@
     "start:api": "node tools/apiServer.js",
     "start": "concurrently \"yarn run start:api\" \"yarn run start:dev\"",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:ci": "jest",
+    "clean:build": "rimraf ./build && mkdir build",
+    "prebuild": "concurrently \"yarn run clean:build\" \"yarn run test:ci\"",
+    "build": "webpack --config webpack.config.prod.js",
+    "postbuild": "concurrently \"yarn run start:api\" \"yarn run serve:build\"",
+    "serve:build": "http-server ./build"
   },
   "jest": {
     "setupFiles": [

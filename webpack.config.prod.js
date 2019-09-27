@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpackBundleAnalyzer = require("webpack-bundle-analyzer");
 
 process.env.NODE_ENV = "production";
@@ -17,12 +17,16 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
-    //Display bundle stats
-    new webpackBundleAnalyzer.BundleAnalyzerPlugin({ analyzeMode: "static" }),
-    new MiniCSSExtractPlugin({ filename: "[name].[contenthash].css" }),
+    // Display bundle stats
+    new webpackBundleAnalyzer.BundleAnalyzerPlugin({ analyzerMode: "static" }),
+
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css"
+    }),
+
     new webpack.DefinePlugin({
-      //This global makes sure React is built in prod mode.
-      "process.env.ENV": JSON.stringify(process.env.NODE_ENV),
+      // This global makes sure React is built in prod mode.
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.API_URL": JSON.stringify("http://localhost:3001")
     }),
     new HtmlWebpackPlugin({
